@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF8"> 
+<title>checkNIF</title>
+<style type="text/css">
+*{
+    font-family: arial,tahoma,sans-serif;
+}
+</style>
+<script type="text/javascript" src="checkNIF.js"></script>
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+// https://niednicifgenerador.appspot.com/
+var NIFs = [
+    "E26620526","E13108659","B62934682","V46159786","V02837243","Q4297246C","M2996216D","K2799761H","H48294433","B28505543",
+    "Q0688731I","97287733X","X2460877S","Z9076953P","Y6217283Y","X6889181Z","Y4405898D","K9138053E","B78821451","24492997K",
+    "X9370486X","U81584567","U58983529","P6433943E","K9812183C","Y2559524Y","X8993395G","Y1811637X","Z8751161B","X1022170G",
+    "02511417R","Y6818204Y","Z9696440J","Q6088796E","L0520908E","Z7098935J","Z4500842T","D40610339","D97213607","W2156937A",
+    "U42773887","D07604879","M9446318I","C8572273D","W1878371B","Z3924975F","X9986381B","X1584796G","Y6072014M","M1321024J"
+];
+</script>
+<script type="text/javascript">
+$(function(){
+    $("#checkinputtext").click(function(e){
+        $("#inputtextout").html('<p>'+$("#nif").val()+': '+checkNIF($("#nif").val())+'</p>');
+    });
+    
+    $("#arrayout").append('<ol>');
+    for(var i=0; i<NIFs.length; i++){
+        $("#arrayout > ol").append('<li>'+NIFs[i]+': '+checkNIF(NIFs[i])+'</li>');
+    }
+    $("#arrayout").append('</ol>');
+    
+    $("#checktextarea").click(function(e){
+        $('#textareainputtextout').html('');
+        var list = $('#nifstextarea').val();
+        list = list.replace(/(\"|\')/gm,'');
+        list = list.replace(/(\r\n|\n|\r)/gm,',');
+        list = list.replace(/\,+/gm,',');
+        list = list.replace(/^\,/,'');
+        list = list.replace(/\,$/,'');
+        list = list.split(',');
+        $("#textareainputtextout").append('<ol>');
+        for(var j=0; j<list.length; j++){
+            $('#textareainputtextout > ol').append('<li>'+list[j]+': '+checkNIF(list[j])+'</li>');
+        }
+        $("#textareainputtextout").append('</ol>');
+//        $("#inputtextout").text('<p>'+checkNIF($("#nif").val())+'</p>');
+    });
+});
+</script>
+</head>
+<body>
+<h1>checkNIF</h1>
+
+<hr>
+<h2>checkNIF Textarea</h2>
+<p><label for="nifstextarea">DNI / NIF / NIE / CIF</label><br><textarea id="nifstextarea" style="width: 450px; height: 320px;"></textarea><br>
+    <a id="checktextarea" href="javascript:void(0);">checkNIF</a></p>
+<div id="textareainputtextout"></div>
+
+<hr>
+<h2>checkNIF Input Text</h2>
+<p>DNI / NIF / NIE / CIF <input type="text" id="nif"><a id="checkinputtext" href="javascript:void(0);">checkNIF</a></p>
+<div id="inputtextout"></div>
+
+<hr>
+<h2>checkNIF Array</h2>
+<div id="arrayout"></div>
+
+</body>
+</html> 
