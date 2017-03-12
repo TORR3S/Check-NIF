@@ -8,4 +8,5 @@ número de identificación fiscal español dado o false en caso de ser erróneo.
         Descripción del algoritmo usado para generar los números de identificación fiscal
 
     https://niednicifgenerador.appspot.com/
-        Web creada para generar números de identificación fiscal aleatórios. Útil para efectuar las pruebas con gran variedad de números aleatórios.
+        Web creada para generar números de identificación fiscal aleatórios.
+        Útil para efectuar las pruebas con gran variedad de números aleatórios.
