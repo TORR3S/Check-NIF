@@ -138,7 +138,7 @@ function checkNIFv2($nif) {
             return preg_match('/^\d/',$nif)? 'DNI': 'NIE: '.$NIF_Type[$nif[0]];
         }
     }
-    else if(preg_match('/^[A-W]\d{7}\w$/',$nif)) {
+    else if(preg_match('/^[ABCDEFGHJKLMNPQRSUVW]\d{7}\w$/',$nif)) {
         for($sum=0,$i=1;$i<8;++$i) {
             $num = $nif[$i]<<$i%2;
             $uni = $num%10;
