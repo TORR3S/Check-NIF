@@ -4,7 +4,7 @@
  */
 function checkNIF(nif) {
     nif = nif.toUpperCase().replace(/(\s|\-)+/, '');
-    if(/^(\d|[XYZ])\d{7}\w$/.test(nif)) {
+    if(/^(\d|[XYZ])\d{7}[A-Z]$/.test(nif)) {
         var num = nif.match(/\d+/);
         num = (nif[0]!='Z'? nif[0]!='Y'? 0: 1: 2)+num;
         if(nif[8]=='TRWAGMYFPDXBNJZSQVHLCKE'[num%23]) {
