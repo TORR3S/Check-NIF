@@ -11,7 +11,7 @@ function checkNIF(nif) {
             return /^\d/.test(nif)? 'DNI': 'NIE';
         }
     }
-    else if(/^[ABCDEFGHJKLMNPQRSUVW]\d{7}[\d|A-J]$/.test(nif)) {
+    else if(/^[ABCDEFGHJKLMNPQRSUVW]\d{7}[\dA-J]$/.test(nif)) {
         for(var sum=0,i=1;i<8;++i) {
             var num = nif[i]<<i%2;
             var uni = num%10;
