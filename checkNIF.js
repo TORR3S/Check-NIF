@@ -2,7 +2,6 @@
  * http://es.wikipedia.org/wiki/N%C3%BAmero_de_identificaci%C3%B3n_fiscal
  * http://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
  */
-
 function checkNIF(nif) {
     nif = nif.toUpperCase().replace(/(\s|\-)+/, '');
     if(/^(\d|[XYZ])\d{7}\w$/.test(nif)) {
@@ -12,7 +11,7 @@ function checkNIF(nif) {
             return /^\d/.test(nif)? 'DNI': 'NIE';
         }
     }
-    else if(/^[A-Z]\d{7}\w$/.test(nif)) {
+    else if(/^[A-W]\d{7}\w$/.test(nif)) {
         for(var sum=0,i=1;i<8;++i) {
             var num = nif[i]<<i%2;
             var uni = num%10;
