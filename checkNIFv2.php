@@ -85,6 +85,7 @@ $CIF_Prov = [
     '84'=>'Madrid',
     '85'=>'Madrid',
     '86'=>'Madrid',
+    '87'=>'Madrid',
     '29'=>'Málaga',
     '92'=>'Málaga',
     '93'=>'Málaga',
