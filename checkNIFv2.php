@@ -131,7 +131,7 @@ $CIF_Prov = [
 ];
 
 function checkNIFv2($nif) {
-    $nif = preg_replace('/(\s|\-)/','',strtoupper($nif));
+    $nif = preg_replace('/[\s\-]+/g','',strtoupper($nif));
     if(preg_match('/^(\d|[XYZ])\d{7}[A-Z]$/',$nif)) {
         preg_match('/\d+/',$nif,$num);
         $num = $num[0];
