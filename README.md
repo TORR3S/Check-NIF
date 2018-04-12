@@ -1,5 +1,3 @@
-#CheckNif
-
 Retorna el tipo de número de identificación fiscal español dado y la
 información básica disponible asociada o false en caso de ser erróneo.
 
