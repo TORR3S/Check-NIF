@@ -3,7 +3,7 @@
  * http://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
  */
 function checkNIF(nif) {
-    nif = nif.toUpperCase().replace(/(\s|\-)+/, '');
+    nif = nif.toUpperCase().replace(/[\s\-]+/g, '');
     if(/^(\d|[XYZ])\d{7}[A-Z]$/.test(nif)) {
         var num = nif.match(/\d+/);
         num = (nif[0]!='Z'? nif[0]!='Y'? 0: 1: 2)+num;
