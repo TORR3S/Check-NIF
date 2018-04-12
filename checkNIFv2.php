@@ -29,6 +29,7 @@ $NIF_Type = [
     'Z'=>'Letra reservada para cuando se agoten los "Y" para Extranjeros identificados por la Policía con un NIE'
 ];
 $CIF_Prov = [
+    '00'=>'No Residente',
     '01'=>'Álava',
     '02'=>'Albacete',
     '03'=>'Alicante',
