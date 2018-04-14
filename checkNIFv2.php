@@ -25,7 +25,7 @@ $NIF_Type = [
     'V'=>'Sociedad Agraria de Transformación',
     'W'=>'Establecimiento permanente de Entidad no residente en España',
     'X'=>'Extranjero identificado por la Policía con un número de identidad de extranjero, NIE, asignado hasta el 15 de julio de 2008',
-    'Y'=>'Extranjero identificado por la Policía con un NIE, asignado desde el 16 de julio de 2008 (Orden INT/2058/2008, BOE del 15 de julio )',
+    'Y'=>'Extranjero identificado por la Policía con un NIE, asignado desde el 16 de julio de 2008 (Orden INT/2058/2008, BOE del 15 de julio)',
     'Z'=>'Letra reservada para cuando se agoten los "Y" para Extranjeros identificados por la Policía con un NIE'
 ];
 $CIF_Prov = [
