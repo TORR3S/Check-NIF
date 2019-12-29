@@ -68,7 +68,7 @@ var CIF_Prov = {
     '18':'Granada',
     '19':'Guadalajara',
     '20':'Guipúzcoa',
-    '75':'Guipúzcoa',
+    '71':'Guipúzcoa',
     '21':'Huelva',
     '22':'Huesca',
     '23':'Jaén',
@@ -128,7 +128,7 @@ var CIF_Prov = {
     '99':'Zaragoza',
     '51':'Ceuta',
     '52':'Melilla'
-}
+};
 
 function checkNIF(nif) {
     nif = nif.toUpperCase().replace(/[\s\-]+/g,'');
@@ -146,7 +146,7 @@ function checkNIF(nif) {
             sum += (num-uni)/10+uni;
         }
         var c = (10-sum%10)%10;
-        if(nif[8]==c || nif[8]=='JABCDEFGHI'[c]) {
+        if((/[KLMNPQRSW]/.test(nif[0]) && nif[8]=='JABCDEFGHI'[c] ) || !/[KLMNPQRSW]/.test(nif[0]) && nif[8]==c) {
             var out = /^[KLM]/.test(nif)? 'ESP': 'CIF ('+CIF_Prov[nif.substr(1,2)]+')';
             return out+': '+NIF_Type[nif[0]];
         }
