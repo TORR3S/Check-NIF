@@ -21,3 +21,13 @@ def checkNIF(nif):
             return 'ESP' if re.search('^[KLM]',nif) else 'CIF'
     return False
 #end checkNIF()
+
+
+
+
+
+code = input('Code:')
+while code!='':
+    print(code)
+    print(checkNIF(code))
+    code = input('Code:')
