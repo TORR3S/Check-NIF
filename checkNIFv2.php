@@ -68,7 +68,7 @@ $CIF_Prov = [
     '18'=>'Granada',
     '19'=>'Guadalajara',
     '20'=>'Guipúzcoa',
-    '75'=>'Guipúzcoa',
+    '71'=>'Guipúzcoa',
     '21'=>'Huelva',
     '22'=>'Huesca',
     '23'=>'Jaén',
@@ -148,7 +148,7 @@ function checkNIFv2($nif) {
             $sum += ($num-$uni)/10+$uni;
         }
         $c = (10-$sum%10)%10;
-        if($nif[8]==$c || $nif[8]=='JABCDEFGHI'[$c]) {
+        if((preg_match('/KLMNPQRSW/',$nif) && $nif[8]=='JABCDEFGHI'[$c]) || (!preg_match('/KLMNPQRSW/',$nif) && $nif[8]==$c)) {
             $out = preg_match('/^[KLM]/',$nif)? 'ESP': 'CIF ('.$CIF_Prov[substr($nif,1,2)].')';
             return $out.': '.$NIF_Type[$nif[0]];
         }
