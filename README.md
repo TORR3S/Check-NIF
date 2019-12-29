@@ -3,7 +3,8 @@ Retorna una cadena de texto que indica el tipo de número o código de identific
   - 'NIE' (Número de Identificación Español)
   - 'CIF' (Código de Identificación Fiscal)
   - 'ESP' (Documento Especial)
-  - False en caso de no pasar la comprobación
+  - False en caso de no pasar la comprobación.
+
 Además la versión checkNIFv2 retorna información básica asociada al documento dado.
 
 Descripción de los algoritmos usados para generar los números de identificación fiscal:
