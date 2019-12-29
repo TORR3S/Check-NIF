@@ -20,7 +20,7 @@ function checkNIFv2($nif) {
             $sum += ($num-$uni)/10+$uni;
         }
         $c = (10-$sum%10)%10;
-        if($nif[8]==$c || $nif[8]=='JABCDEFGHI'[$c]) {
+        if((preg_match('/KLMNPQRSW/',$nif) && $nif[8]=='JABCDEFGHI'[$c]) || (!preg_match('/KLMNPQRSW/',$nif) && $nif[8]==$c)) {
             return preg_match('/^[KLM]/',$nif)? 'ESP': 'CIF';
         }
     }
