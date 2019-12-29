@@ -19,7 +19,7 @@ function checkNIF(nif) {
             sum += (num-uni)/10+uni;
         }
         var c = (10-sum%10)%10;
-        if(nif[8]==c || nif[8]=='JABCDEFGHI'[c]) {
+        if((/[KLMNPQRSW]/.test(nif[0]) && nif[8]=='JABCDEFGHI'[c] ) || !/[KLMNPQRSW]/.test(nif[0]) && nif[8]==c) {
             return /^[KLM]/.test(nif)? 'ESP': 'CIF';
         }
     }
