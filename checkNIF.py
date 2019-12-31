@@ -1,6 +1,5 @@
 #http://es.wikipedia.org/wiki/N%C3%BAmero_de_identificaci%C3%B3n_fiscal
 #http://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
-#https://niednicifgenerador.appspot.com/
 
 import re
 def checkNIF(nif):
@@ -17,7 +16,8 @@ def checkNIF(nif):
             uni = num%10
             sum += int((num-uni)/10+uni)
         c = (10-sum%10)%10
-        if (nif[0] in 'KLMNPQRSW' and nif[8]=='JABCDEFGHI'[c]) or (nif[0] not in 'KLMNPQRSW' and nif[8]==str(c)):
+        if (nif[0] in 'KLMNPQRSW' and nif[8]=='JABCDEFGHI'[c]) or (
+        nif[0] not in 'KLMNPQRSW' and nif[8]==str(c)):
             return 'ESP' if re.search('^[KLM]',nif) else 'CIF'
     return False
 #end checkNIF()
