@@ -1,7 +1,6 @@
 <?php
 /* http://es.wikipedia.org/wiki/N%C3%BAmero_de_identificaci%C3%B3n_fiscal
  * http://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
- * https://niednicifgenerador.appspot.com/
  */
 function checkNIFv2($nif) {
     $nif = preg_replace('/[\s\-]+/','',strtoupper($nif));
@@ -20,7 +19,8 @@ function checkNIFv2($nif) {
             $sum += ($num-$uni)/10+$uni;
         }
         $c = (10-$sum%10)%10;
-        if((preg_match('/KLMNPQRSW/',$nif) && $nif[8]=='JABCDEFGHI'[$c]) || (!preg_match('/KLMNPQRSW/',$nif) && $nif[8]==$c)) {
+        if((preg_match('/KLMNPQRSW/',$nif) && $nif[8]=='JABCDEFGHI'[$c]) ||
+          (!preg_match('/KLMNPQRSW/',$nif) && $nif[8]==$c)) {
             return preg_match('/^[KLM]/',$nif)? 'ESP': 'CIF';
         }
     }
