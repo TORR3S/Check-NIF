@@ -1,7 +1,6 @@
 <?php
 /* http://es.wikipedia.org/wiki/N%C3%BAmero_de_identificaci%C3%B3n_fiscal
  * http://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
- * https://niednicifgenerador.appspot.com/
  */
 $NIF_Type = [
     'A'=>'Sociedad Anónima',
@@ -148,9 +147,10 @@ function checkNIFv2($nif) {
             $sum += ($num-$uni)/10+$uni;
         }
         $c = (10-$sum%10)%10;
-        if((preg_match('/KLMNPQRSW/',$nif) && $nif[8]=='JABCDEFGHI'[$c]) || (!preg_match('/KLMNPQRSW/',$nif) && $nif[8]==$c)) {
-            $out = preg_match('/^[KLM]/',$nif)? 'ESP': 'CIF ('.$CIF_Prov[substr($nif,1,2)].')';
-            return $out.': '.$NIF_Type[$nif[0]];
+        if((preg_match('/KLMNPQRSW/',$nif) && $nif[8]=='JABCDEFGHI'[$c]) ||
+          (!preg_match('/KLMNPQRSW/',$nif) && $nif[8]==$c)) {
+            return (preg_match('/^[KLM]/',$nif)? 'ESP:':
+                'CIF: ('.$CIF_Prov[substr($nif,1,2)].')').' '.$NIF_Type[$nif[0]];
         }
     }
     return false;
