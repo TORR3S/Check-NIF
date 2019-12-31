@@ -145,7 +145,8 @@ def checkNIF(nif):
         c = (10-sum%10)%10
         if (nif[0] in 'KLMNPQRSW' and nif[8]=='JABCDEFGHI'[c]) or (
         nif[0] not in 'KLMNPQRSW' and nif[8]==str(c)):
-            return ('ESP:' if re.search('^[KLM]',nif) else 'CIF: ('+CIF_Prov[nif[1:3]]+')')+' '+NIF_Type[nif[0]]
+            return ('ESP:' if re.search('^[KLM]',nif) else
+                    'CIF: ('+CIF_Prov[nif[1:3]]+')')+' '+NIF_Type[nif[0]]
     return False
 #end checkNIF()
 
