@@ -1,7 +1,6 @@
 /*
  * http://es.wikipedia.org/wiki/N%C3%BAmero_de_identificaci%C3%B3n_fiscal
  * http://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
- * https://niednicifgenerador.appspot.com/
  */
 var NIF_Type = {
     'A':'Sociedad Anónima',
@@ -146,9 +145,10 @@ function checkNIF(nif) {
             sum += (num-uni)/10+uni;
         }
         var c = (10-sum%10)%10;
-        if((/[KLMNPQRSW]/.test(nif[0]) && nif[8]=='JABCDEFGHI'[c] ) || !/[KLMNPQRSW]/.test(nif[0]) && nif[8]==c) {
-            var out = /^[KLM]/.test(nif)? 'ESP': 'CIF ('+CIF_Prov[nif.substr(1,2)]+')';
-            return out+': '+NIF_Type[nif[0]];
+        if((/[KLMNPQRSW]/.test(nif[0]) && nif[8]=='JABCDEFGHI'[c]) ||
+          (!/[KLMNPQRSW]/.test(nif[0]) && nif[8]==c)) {
+            return (/^[KLM]/.test(nif)? 'ESP:':
+             'CIF: ('+CIF_Prov[nif.substr(1,2)]+')'+' '+NIF_Type[nif[0]];
         }
     }
     return false;
