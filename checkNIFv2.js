@@ -1,6 +1,5 @@
-/*
- * http://es.wikipedia.org/wiki/N%C3%BAmero_de_identificaci%C3%B3n_fiscal
- * http://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
+/* https://es.wikipedia.org/wiki/N%C3%BAmero_de_identificaci%C3%B3n_fiscal
+ * https://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
  */
 var NIF_Type = {
     'A':'Sociedad Anónima',
@@ -129,7 +128,7 @@ var CIF_Prov = {
     '52':'Melilla'
 };
 
-function checkNIF(nif) {
+function checkNIFv2(nif) {
     nif = nif.toUpperCase().replace(/[\s\-]+/g,'');
     if(/^(\d|[XYZ])\d{7}[A-Z]$/.test(nif)) {
         var num = nif.match(/\d+/);
@@ -145,11 +144,11 @@ function checkNIF(nif) {
             sum += (num-uni)/10+uni;
         }
         var c = (10-sum%10)%10;
-        if((/[KLMNPQRSW]/.test(nif[0]) && nif[8]=='JABCDEFGHI'[c]) ||
+        if((/[KLMNPQRSW]/.test(nif[0]) && nif[8]=='JABCDEFGHI'[c] ) ||
           (!/[KLMNPQRSW]/.test(nif[0]) && nif[8]==c)) {
             return (/^[KLM]/.test(nif)? 'ESP:':
-             'CIF: ('+CIF_Prov[nif.substr(1,2)]+')'+' '+NIF_Type[nif[0]];
+             'CIF: ('+CIF_Prov[nif.substr(1,2)]+')')+' '+NIF_Type[nif[0]];
         }
     }
     return false;
-}
+} //end checkNIFv2()
