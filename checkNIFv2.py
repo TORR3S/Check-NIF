@@ -1,5 +1,5 @@
-#http://es.wikipedia.org/wiki/N%C3%BAmero_de_identificaci%C3%B3n_fiscal
-#http://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
+#https://es.wikipedia.org/wiki/N%C3%BAmero_de_identificaci%C3%B3n_fiscal
+#https://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
 
 NIF_Type = {
     'A':'Sociedad Anónima',
@@ -129,7 +129,7 @@ CIF_Prov = {
 }
 
 import re
-def checkNIF(nif):
+def checkNIFv2(nif):
     nif = re.sub('[\s\-]+','',nif.upper())
     if re.search('^(\d|[XYZ])\d{7}[A-Z]$',nif):
         num = re.findall('\d+',nif)[0]
@@ -144,18 +144,8 @@ def checkNIF(nif):
             sum += int((num-uni)/10+uni)
         c = (10-sum%10)%10
         if (nif[0] in 'KLMNPQRSW' and nif[8]=='JABCDEFGHI'[c]) or (
-        nif[0] not in 'KLMNPQRSW' and nif[8]==str(c)):
+            nif[0] not in 'KLMNPQRSW' and nif[8]==str(c)):
             return ('ESP:' if re.search('^[KLM]',nif) else
                     'CIF: ('+CIF_Prov[nif[1:3]]+')')+' '+NIF_Type[nif[0]]
     return False
-#end checkNIF()
-
-
-
-
-
-code = input('Code:')
-while code!='':
-    print(code)
-    print(checkNIF(code))
-    code = input('Code:')
+#end checkNIFv2()
