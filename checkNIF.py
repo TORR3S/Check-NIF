@@ -3,7 +3,7 @@
 
 import re
 def checkNIF(nif):
-    nif = re.sub('[\s\-]+','',nif.upper())
+    nif = re.sub('[\W\s]+','',nif.upper())
     if re.search('^(\d|[XYZ])\d{7}[A-Z]$',nif):
         num = re.findall('\d+',nif)[0]
         num = int(('2' if nif[0]=='Z' else '1' if nif[0]=='Y' else '0') + num)

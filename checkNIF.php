@@ -3,7 +3,7 @@
  * https://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
  */
 function checkNIF($nif) {
-    $nif = preg_replace('/[\s\-]+/','',strtoupper($nif));
+    $nif = preg_replace('/[\W\s]+/','',strtoupper($nif));
     if(preg_match('/^(\d|[XYZ])\d{7}[A-Z]$/',$nif)) {
         preg_match('/\d+/',$nif,$num);
         $num = $num[0];
