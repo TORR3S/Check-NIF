@@ -150,9 +150,9 @@ function checkNIFv2($nif) {
         if((preg_match('/KLMNPQRSW/',$nif) && $nif[8]=='JABCDEFGHI'[$c]) ||
           (!preg_match('/KLMNPQRSW/',$nif) && $nif[8]==$c)) {
             return (preg_match('/^[KLM]/',$nif)? 'ESP:':
-                'CIF: ('.$CIF_Prov[substr($nif,1,2)].')').' '.$NIF_Type[$nif[0]];
+             'CIF: ('.$CIF_Prov[substr($nif,1,2)].')').' '.$NIF_Type[$nif[0]];
         }
     }
     return false;
-}
+} //end checkNIFv2()
 ?>
