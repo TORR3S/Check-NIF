@@ -1,16 +1,3 @@
-
-# Los códigos de documentos usados para poner
-# a prueba el algoritmo han sido obtenidos
-# de un generador online, por lo que cualquier
-# coincidencia con documentos reales es fortuita.
-# Tales códigos solo incluyen información para
-# determinar el tipo de documento y su validez,
-# nunca se podrá obtener información personal
-# ni siquiera si el código es vigente o no.
-# Si encuentra su código aquí listado,
-# puede solicitar que sea eliminado y se
-# procederá con la mayor brevedad posible.
-
 import re
 from checkNIFv2 import checkNIFv2
 
@@ -41,4 +28,3 @@ while code!='':
     else:
         print(checkNIFv2(code))
     code = input('>>>')
-

@@ -1,6 +1,3 @@
-/* https://es.wikipedia.org/wiki/N%C3%BAmero_de_identificaci%C3%B3n_fiscal
- * https://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
- */
 var dType = {
     'A':'Sociedad Anónima',
     'B':'Sociedad de Responsabilidad Limitada',

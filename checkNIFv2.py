@@ -144,4 +144,3 @@ def checkNIFv2(nif):
             return ('ESP: ' if re.search('^[KLM]',nif) else
                     'CIF: ('+dProv[nif[1:3]]+') ')+dType[nif[0]]
     return False
-

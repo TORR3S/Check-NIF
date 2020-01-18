@@ -16,4 +16,3 @@ def checkNIF(nif):
         nif[0] not in 'KLMNPQRSW' and nif[8]==str(c)):
             return 'ESP' if re.search('^[KLM]',nif) else 'CIF'
     return False
-

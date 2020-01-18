@@ -28,4 +28,3 @@ while code!='':
     else:
         print(checkNIF(code))
     code = input('>>>')
-
