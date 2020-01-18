@@ -1,7 +1,4 @@
-#https://es.wikipedia.org/wiki/N%C3%BAmero_de_identificaci%C3%B3n_fiscal
-#https://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
-
-NIF_Type = {
+dType = {
     'A':'Sociedad Anónima',
     'B':'Sociedad de Responsabilidad Limitada',
     'C':'Sociedad Colectiva',
@@ -26,7 +23,7 @@ NIF_Type = {
     'Y':'Extranjero identificado por la Policía con un NIE con letra "Y", asignado desde el 16 de julio de 2008 (Orden INT/2058/2008, BOE del 15 de julio)',
     'Z':'Letra "Z" reservada para cuando se agoten los "Y" para Extranjeros identificados por la Policía con un NIE'
 }
-CIF_Prov = {
+dProv = {
     '00':'No Residente',
     '01':'Álava',
     '02':'Albacete',
@@ -130,30 +127,21 @@ CIF_Prov = {
 
 import re
 def checkNIFv2(nif):
-    nif = re.sub('[\W\s]+','',nif.upper())
+    nif = re.sub('[_\W\s]+','',nif.upper())
     if re.search('^(\d|[XYZ])\d{7}[A-Z]$',nif):
-        num = re.findall('\d+',nif)[0]
-        num = int(('2' if nif[0]=='Z' else '1' if nif[0]=='Y' else '0') + num)
-        if nif[8]=='TRWAGMYFPDXBNJZSQVHLCKE'[num%23]:
-            return 'DNI' if re.search('^\d',nif) else 'NIE: '+NIF_Type[nif[0]]
+        nu = re.findall('\d+',nif)[0]
+        nu = int(('2' if nif[0]=='Z' else '1' if nif[0]=='Y' else '0') + nu)
+        if nif[8]=='TRWAGMYFPDXBNJZSQVHLCKE'[nu%23]:
+            return 'DNI' if re.search('^\d',nif) else 'NIE: '+dType[nif[0]]
     elif re.search('^[ABCDEFGHJKLMNPQRSUVW]\d{7}[\dA-J]$',nif):
-        sum = 0
+        su = 0
         for i in range(1,8):
-            num = int(nif[i])<<i%2
-            uni = num%10
-            sum += int((num-uni)/10+uni)
-        c = (10-sum%10)%10
+            nu = int(nif[i])<<i%2
+            su += nu//10+nu%10
+        c = (10-su)%10
         if (nif[0] in 'KLMNPQRSW' and nif[8]=='JABCDEFGHI'[c]) or (
-            nif[0] not in 'KLMNPQRSW' and nif[8]==str(c)):
-            return ('ESP:' if re.search('^[KLM]',nif) else
-                    'CIF: ('+CIF_Prov[nif[1:3]]+')')+' '+NIF_Type[nif[0]]
+        nif[0] not in 'KLMNPQRSW' and nif[8]==str(c)):
+            return ('ESP: ' if re.search('^[KLM]',nif) else
+                    'CIF: ('+dProv[nif[1:3]]+') ')+dType[nif[0]]
     return False
-#end checkNIFv2()
-
-
-
-
-
-
-
 

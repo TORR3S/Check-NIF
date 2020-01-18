@@ -1,7 +1,7 @@
 /* https://es.wikipedia.org/wiki/N%C3%BAmero_de_identificaci%C3%B3n_fiscal
  * https://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
  */
-var NIF_Type = {
+var dType = {
     'A':'Sociedad Anónima',
     'B':'Sociedad de Responsabilidad Limitada',
     'C':'Sociedad Colectiva',
@@ -26,7 +26,7 @@ var NIF_Type = {
     'Y':'Extranjero identificado por la Policía con un NIE, asignado desde el 16 de julio de 2008 (Orden INT/2058/2008, BOE del 15 de julio)',
     'Z':'Letra reservada para cuando se agoten los "Y" para Extranjeros identificados por la Policía con un NIE'
 };
-var CIF_Prov = {
+var dProv = {
     '00':'No Residente',
     '01':'Álava',
     '02':'Albacete',
@@ -129,26 +129,26 @@ var CIF_Prov = {
 };
 
 function checkNIFv2(nif) {
-    nif = nif.toUpperCase().replace(/[\W\s]+/g,'');
+    nif = nif.toUpperCase().replace(/[_\W\s]+/g,'');
     if(/^(\d|[XYZ])\d{7}[A-Z]$/.test(nif)) {
-        var num = nif.match(/\d+/);
-        num = (nif[0]!='Z'? nif[0]!='Y'? 0: 1: 2)+num;
-        if(nif[8]=='TRWAGMYFPDXBNJZSQVHLCKE'[num%23]) {
-            return /^\d/.test(nif)? 'DNI': 'NIE: '+NIF_Type[nif[0]];
+        var nu = nif.match(/\d+/);
+        nu = (nif[0]!='Z'? nif[0]!='Y'? 0: 1: 2)+nu;
+        if(nif[8]=='TRWAGMYFPDXBNJZSQVHLCKE'[nu%23]) {
+            return /^\d/.test(nif)? 'DNI': 'NIE: '+dType[nif[0]];
         }
     }
     else if(/^[ABCDEFGHJKLMNPQRSUVW]\d{7}[\dA-J]$/.test(nif)) {
-        for(var sum=0,i=1;i<8;++i) {
-            var num = nif[i]<<i%2;
-            var uni = num%10;
-            sum += (num-uni)/10+uni;
+        for(var su=0,i=1;i<8;++i) {
+            var nu = nif[i]<<i%2;
+            var un = nu%10;
+            su += (nu-un)/10+un;
         }
-        var c = (10-sum%10)%10;
+        var c = (10-su)%10;
         if((/[KLMNPQRSW]/.test(nif[0]) && nif[8]=='JABCDEFGHI'[c] ) ||
           (!/[KLMNPQRSW]/.test(nif[0]) && nif[8]==c)) {
-            return (/^[KLM]/.test(nif)? 'ESP:':
-             'CIF: ('+CIF_Prov[nif.substr(1,2)]+')')+' '+NIF_Type[nif[0]];
+            return (/^[KLM]/.test(nif)? 'ESP: ':
+             'CIF: ('+dProv[nif.substr(1,2)]+') ')+dType[nif[0]];
         }
     }
     return false;
-} //end checkNIFv2()
+}

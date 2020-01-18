@@ -2,7 +2,7 @@
 /* https://es.wikipedia.org/wiki/N%C3%BAmero_de_identificaci%C3%B3n_fiscal
  * https://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
  */
-$NIF_Type = [
+$dType = [
     'A'=>'Sociedad Anónima',
     'B'=>'Sociedad de Responsabilidad Limitada',
     'C'=>'Sociedad Colectiva',
@@ -27,7 +27,7 @@ $NIF_Type = [
     'Y'=>'Extranjero identificado por la Policía con un NIE, asignado desde el 16 de julio de 2008 (Orden INT/2058/2008, BOE del 15 de julio)',
     'Z'=>'Letra reservada para cuando se agoten los "Y" para Extranjeros identificados por la Policía con un NIE'
 ];
-$CIF_Prov = [
+$dProv = [
     '00'=>'No Residente',
     '01'=>'Álava',
     '02'=>'Albacete',
@@ -129,30 +129,30 @@ $CIF_Prov = [
     '52'=>'Melilla'
 ];
 function checkNIFv2($nif) {
-    global $NIF_Type;
-    global $CIF_Prov;
-    $nif = preg_replace('/[\W\s]+/','',strtoupper($nif));
+    global $dType;
+    global $dProv;
+    $nif = preg_replace('/[_\W\s]+/','',strtoupper($nif));
     if(preg_match('/^(\d|[XYZ])\d{7}[A-Z]$/',$nif)) {
-        preg_match('/\d+/',$nif,$num);
-        $num = $num[0];
-        $num = ($nif[0]!='Z'? $nif[0]!='Y'? 0: 1: 2).$num;
-        if($nif[8]=='TRWAGMYFPDXBNJZSQVHLCKE'[$num%23]) {
-            return preg_match('/^\d/',$nif)? 'DNI': 'NIE: '.$NIF_Type[$nif[0]];
+        preg_match('/\d+/',$nif,$nu);
+        $nu = $nu[0];
+        $nu = ($nif[0]!='Z'? $nif[0]!='Y'? 0: 1: 2).$nu;
+        if($nif[8]=='TRWAGMYFPDXBNJZSQVHLCKE'[$nu%23$]) {
+            return preg_match('/^\d/',$nif)? 'DNI': 'NIE: '.$dType[$nif[0]];
         }
     }
     else if(preg_match('/^[ABCDEFGHJKLMNPQRSUVW]\d{7}[\dA-J]$/',$nif)) {
-        for($sum=0,$i=1;$i<8;++$i) {
-            $num = $nif[$i]<<$i%2;
-            $uni = $num%10;
-            $sum += ($num-$uni)/10+$uni;
+        for($su=0,$i=1;$i<8;++$i) {
+            $nu = $nif[$i]<<$i%2;
+            $un = $nu%10;
+            $su += ($nu-$un)/10+$un;
         }
-        $c = (10-$sum%10)%10;
+        $c = (10-$su)%10;
         if((preg_match('/KLMNPQRSW/',$nif) && $nif[8]=='JABCDEFGHI'[$c]) ||
           (!preg_match('/KLMNPQRSW/',$nif) && $nif[8]==$c)) {
-            return (preg_match('/^[KLM]/',$nif)? 'ESP:':
-             'CIF: ('.$CIF_Prov[substr($nif,1,2)].')').' '.$NIF_Type[$nif[0]];
+            return (preg_match('/^[KLM]/',$nif)? 'ESP: ':
+             'CIF: ('.$dProv[substr($nif,1,2)].') ').$dType[$nif[0]];
         }
     }
     return false;
-} //end checkNIFv2()
+}
 ?>
