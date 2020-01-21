@@ -129,18 +129,19 @@ import re
 def checkNIFv2(nif):
     nif = re.sub('[_\W\s]+','',nif.upper())
     if re.search('^(\d|[XYZ])\d{7}[A-Z]$',nif):
-        nu = re.findall('\d+',nif)[0]
-        nu = int(('2' if nif[0]=='Z' else '1' if nif[0]=='Y' else '0') + nu)
-        if nif[8]=='TRWAGMYFPDXBNJZSQVHLCKE'[nu%23]:
+        num = re.findall('\d+',nif)[0]
+        num = int(('2' if nif[0]=='Z' else '1' if nif[0]=='Y' else '0')+num)
+        if nif[8]=='TRWAGMYFPDXBNJZSQVHLCKE'[num%23]:
             return 'DNI' if re.search('^\d',nif) else 'NIE: '+dType[nif[0]]
     elif re.search('^[ABCDEFGHJKLMNPQRSUVW]\d{7}[\dA-J]$',nif):
-        su = 0
+        sum = 0
         for i in range(1,8):
-            nu = int(nif[i])<<i%2
-            su += nu//10+nu%10
-        c = (10-su)%10
-        if (nif[0] in 'KLMNPQRSW' and nif[8]=='JABCDEFGHI'[c]) or (
-        nif[0] not in 'KLMNPQRSW' and nif[8]==str(c)):
+            num = int(nif[i])<<i%2
+            sum += num//10+num%10
+        c = (10-sum)%10
+        if(((nif[0] in 'KLMNPQRSW' or nif[1:3]=='00') and nif[8]=='JABCDEFGHI'[c]) or
+            (nif[0] in 'ABEH' and nif[8]==str(c)) or
+            (nif[0] in 'CDFGJUV' and (nif[8]=='JABCDEFGHI'[c] or nif[8]==str(c))) ):
             return ('ESP: ' if re.search('^[KLM]',nif) else
                     'CIF: ('+dProv[nif[1:3]]+') ')+dType[nif[0]]
     return False
